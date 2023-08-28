@@ -59,7 +59,7 @@
 //     Defaults to "{supplement} {problem number}".
 //   supplement: Content to precede the problem number.
 //     Defaults to "Problem".
-//   page-break: Pagebreak strategy. Ignored for first problem.
+//   break-strategy: Pagebreak strategy. Ignored for first problem.
 //     "break":     insert pagebreak before problem
 //     "no-break":  place problem directly after preceding content
 //     "fit":       pagebreak only if problem cannot fit on the page
@@ -69,17 +69,17 @@
   body,
   title: none,
   supplement: "Problem",
-  page-break: "break",
+  break-strategy: "break",
   header-margin-bottom: 20pt,
   problem-margin-bottom: 30pt,
 ) = {
   assert(
     (
-      page-break == "break"
-      or page-break == "no-break"
-      or page-break == "fit"
+      break-strategy == "break"
+      or break-strategy == "no-break"
+      or break-strategy == "fit"
     ),
-    message: "page-break must be \"break\" or \"no-break\" or \"fit\""
+    message: "break-strategy must be \"break\" or \"no-break\" or \"fit\""
   )
 
   // combine problem header and response
@@ -102,12 +102,12 @@
 
   // place problem-content based on page break strategy
   counter(_problem-count-ckey).display(prob-num => {
-    if prob-num == 0 or page-break == "no-break" {
+    if prob-num == 0 or break-strategy == "no-break" {
       problem-content
-    } else if page-break == "break" {
+    } else if break-strategy == "break" {
       pagebreak()
       problem-content
-    } else if page-break == "fit" {
+    } else if break-strategy == "fit" {
       layout(size => style(styles => {
         let content-height = measure(
           block(width: size.width, problem-content),

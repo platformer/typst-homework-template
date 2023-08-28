@@ -16,18 +16,18 @@
 ]
 
 // "break" starts the problem on the next page
-#problem(page-break: "break")[
+#problem(break-strategy: "break")[
   #lorem(100)
 ]
 
 // "no-break" starts the problem on the current page
-#problem(page-break: "no-break")[
+#problem(break-strategy: "no-break")[
   #lorem(400)
 ]
 
 // "fit" will only start the problem on the next page
 //   if it doesn't fit on the current page
-#problem(page-break: "fit")[
+#problem(break-strategy: "fit")[
   #set enum(numbering: "a)")
   + #lorem(10)
   
@@ -36,14 +36,14 @@
   + #lorem(10)
 ]
 
-#problem(page-break: "fit")[
+#problem(break-strategy: "fit")[
   #lorem(50)
 ]
 
-#problem(page-break: "fit")[
+#problem(break-strategy: "fit")[
   #lorem(200)
 ]
 
-#problem(title: "Bonus", page-break: "break")[
+#problem(title: "Bonus", break-strategy: "break")[
   #lorem(300)
 ]
