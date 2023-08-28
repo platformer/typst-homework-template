@@ -132,22 +132,24 @@
 //
 // Parameters:
 //   doc: Document content.
+//   title: Document Title.
 //   number: Homework number.
 //   class: Class name.
 //   authors: List of author names.
 //   date: Date string.
 #let hw(
   doc,
+  title: "Homework",
   number: none,
   class: none,
   authors: (),
   date: none
 ) = {
-  let title = "Homework " + str(number)
+  let real_title = title + " " + str(number)
   
   set document(
     author: authors,
-    title: title
+    title: real_title
   )
   
   set page(
@@ -180,7 +182,7 @@
 
   // title
   align(center)[
-    #block(text(weight: 700, 1.75em, title))
+    #block(text(weight: 700, 1.75em, real_title))
   ]
 
   // class info
