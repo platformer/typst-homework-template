@@ -160,7 +160,7 @@
       if loc.page() != 1 {
         align(right)[#text(size: 10pt)[
           #class\
-          #title\
+          #real_title\
           #authors.fold("", (acc, author) => acc + h(1em) + author)
         ]]
       }
