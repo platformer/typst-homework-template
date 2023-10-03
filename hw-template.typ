@@ -25,11 +25,11 @@
   header-margin-bottom: 20pt,
 ) = {
   counter(_problem-count-ckey).step()
-  
+
   if body == none {
     counter(_problem-number-ckey).step()
   }
-  
+
   rect(
     width: 100%,
     height: auto,
@@ -46,7 +46,7 @@
       }
     ]
   ]
-  
+
   v(weak: true, header-margin-bottom)
 }
 
@@ -96,7 +96,7 @@
         header-margin-bottom: header-margin-bottom,
       )
     }
-    
+
     #body
   ]
 
@@ -105,7 +105,7 @@
     if prob-num == 0 or break-strategy == "no-break" {
       problem-content
     } else if break-strategy == "break" {
-      pagebreak()
+      pagebreak(weak: true)
       problem-content
     } else if break-strategy == "fit" {
       layout(size => style(styles => {
@@ -115,7 +115,7 @@
         ).height
 
         if content-height > size.height {
-          colbreak()
+          colbreak(weak: true)
           problem-content
         } else {
           block(breakable: false)[#problem-content]
@@ -146,12 +146,12 @@
   date: none
 ) = {
   let real_title = title + " " + str(number)
-  
+
   set document(
     author: authors,
     title: real_title
   )
-  
+
   set page(
     paper: "us-letter",
     margin: 1.25in,
@@ -205,6 +205,6 @@
       ..authors.map(author => align(center, strong(author))),
     ),
   )
-  
+
   doc
 }
