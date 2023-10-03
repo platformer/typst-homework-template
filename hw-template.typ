@@ -5,6 +5,9 @@
 // counter to track problem number
 #let _problem-number-ckey = "_problem-number"
 
+// state value to store height of content area
+#let _content-area-size = state("_hw-content-area-size", none)
+
 // Creates a problem header with automatic numbering.
 //
 // Parameters:
@@ -108,14 +111,14 @@
       pagebreak(weak: true)
       problem-content
     } else if break-strategy == "fit" {
-      layout(size => style(styles => {
+      _content-area-size.display(size => style(styles => {
         let content-height = measure(
           block(width: size.width, problem-content),
           styles
         ).height
 
         if content-height > size.height {
-          colbreak(weak: true)
+          pagebreak(weak: true)
           problem-content
         } else {
           block(breakable: false)[#problem-content]
@@ -145,6 +148,12 @@
   authors: (),
   date: none
 ) = {
+  // PLEASE CHANGE PAGE DIMENSIONS HERE
+  // DON'T SET paper PARAMETER IN page
+  let paper-width = 8.5in
+  let paper-height = 11in
+  let margin = (x: 1.25in, y: 1in)
+
   let real_title = title + " " + str(number)
 
   set document(
@@ -153,8 +162,9 @@
   )
 
   set page(
-    paper: "us-letter",
-    margin: 1.25in,
+    width: paper-width,
+    height: paper-height,
+    margin: margin,
     numbering: "1",
     header: locate(loc =>
       if loc.page() != 1 {
@@ -179,6 +189,11 @@
   set heading(
     numbering: none,
   )
+
+  _content-area-size.update((
+    width: paper-width - margin.at("x") * 2,
+    height: paper-height - margin.at("y") * 2
+  ))
 
   // title
   align(center)[

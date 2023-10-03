@@ -26,13 +26,13 @@
 ]
 
 // "fit" will only start the problem on the next page
-//   if it doesn't fit on the current page
+// if it doesn't fit on the current page
 #problem(break-strategy: "fit")[
   #set enum(numbering: "a)")
   + #lorem(10)
-  
+
   + #lorem(10)
-  
+
   + #lorem(10)
 ]
 
