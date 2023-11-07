@@ -162,6 +162,7 @@
   )
 
   set page(
+    "us-letter",
     width: paper-width,
     height: paper-height,
     margin: margin,
